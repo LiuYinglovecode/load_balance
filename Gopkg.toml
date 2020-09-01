@@ -1,0 +1,65 @@
+# Gopkg.toml example
+#
+# Refer to https://golang.github.io/dep/docs/Gopkg.toml.html
+# for detailed Gopkg.toml documentation.
+#
+# required = ["github.com/user/thing/cmd/thing"]
+# ignored = ["github.com/user/project/pkgX", "bitbucket.org/user/project/pkgA/pkgY"]
+#
+# [[constraint]]
+#   name = "github.com/user/project"
+#   version = "1.0.0"
+#
+# [[constraint]]
+#   name = "github.com/user/project2"
+#   branch = "dev"
+#   source = "github.com/myfork/project2"
+#
+# [[override]]
+#   name = "github.com/x/y"
+#   version = "2.4.0"
+#
+# [prune]
+#   non-go = false
+#   go-tests = true
+#   unused-packages = true
+
+[[constraint]]
+  name = "github.com/docker/docker"
+  version = "v17.03.2-ce"
+
+[[constraint]]
+  name = "github.com/davyxu/cellnet"
+  branch = "v4"
+
+
+# cloud-provider使用
+[[override]]
+  name = "k8s.io/kubernetes"
+  version = "1.11.5"
+[[override]]
+  name = "k8s.io/client-go"
+  branch = "release-8.0"
+[[override]]
+  name = "k8s.io/api"
+  version = "kubernetes-1.11.5"
+
+[[override]]
+  name = "k8s.io/apimachinery"
+  version = "kubernetes-1.11.5"
+
+[[override]]
+  name = "k8s.io/apiserver"
+  version = "kubernetes-1.11.5"
+
+[[override]]
+  name = "k8s.io/apiextensions-apiserver"
+  version = "kubernetes-1.11.5"
+
+[[override]]
+  name = "k8s.io/kube-openapi"
+  revision = "e494cc58111187acad93e64529228a2fc0153e39"
+
+[prune]
+  go-tests = true
+  unused-packages = true
