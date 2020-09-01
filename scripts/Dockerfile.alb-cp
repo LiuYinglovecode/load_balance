@@ -1,0 +1,17 @@
+# release or test or dev
+FROM golang:1.12 as BUILD
+
+COPY . /go/src/code.htres.cn/casicloud/alb
+RUN cd /go/src/code.htres.cn/casicloud/alb && make build
+
+###
+FROM golang:1.12
+ARG BUILD_TARGET=dev
+ENV BUILD_TARGET ${BUILD_TARGET}
+
+RUN mkdir -p /go/bin/config
+COPY --from=BUILD /go/src/code.htres.cn/casicloud/alb/bin/alb-cp /go/bin
+COPY --from=BUILD /go/src/code.htres.cn/casicloud/alb/cmd/alb-cp/config/ /go/bin/config
+WORKDIR /go/bin
+
+CMD ["alb-cp","--cloud-provider=htnm","--cloud-config=config/${BUILD_TARGET}/albcp.cfg"]

@@ -1,0 +1,19 @@
+# release or test or dev
+FROM golang:1.12 as BUILD
+
+COPY . /go/src/code.htres.cn/casicloud/alb
+RUN cd /go/src/code.htres.cn/casicloud/alb && make build
+
+###
+FROM golang:1.12
+ARG BUILD_TARGET=dev
+ENV BUILD_TARGET ${BUILD_TARGET}
+
+RUN mkdir -p /go/bin/config /go/bin/logs
+COPY --from=BUILD /go/src/code.htres.cn/casicloud/alb/bin/lbmc /go/bin
+COPY --from=BUILD /go/src/code.htres.cn/casicloud/alb/cmd/lbmc/config/ /go/bin/config
+WORKDIR /go/bin
+
+EXPOSE 7021
+
+CMD ["lbmc", "--config=config/${BUILD_TARGET}/center.cfg"]

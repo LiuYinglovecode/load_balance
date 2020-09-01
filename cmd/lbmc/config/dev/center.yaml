@@ -1,0 +1,24 @@
+# 工作目录，存储输出日志，Agent持久化的相关内容 默认当前目录
+WorkDir: /home/user
+# 日志输出级别
+LogLevel: info
+# 审计日志路径
+AuditLogPath: /home/user/audit.log
+# 系统日志路径
+SysLogPath: /home/user/sys.log
+# 连接agent超时时间(毫秒)
+AgentTimeout: 120000
+# 服务端口号
+Port: 8080
+# 数据库连接地址
+DBArgs: "root:1234.asd@tcp(172.20.4.210:30005)/adc?charset=utf8&parseTime=True"
+# 数据库驱动名称
+Dialect: mysql
+# 需要连接的etcd地址
+EtcdEndpoints:
+  - "172.20.4.210:30006"
+# Etcd 证书双向认证
+EtcdTLS:
+   ca: /etc/alb/ca.crt
+   cert: /etc/alb/peer.crt
+   key: /etc/alb/peer.key

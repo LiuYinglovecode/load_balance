@@ -1,0 +1,46 @@
+# agent 配置样例
+
+# Config RPC listened address for rpc controller 默认 0.0.0.0:6767
+RPC: 0.0.0.1:6767
+
+# 工作目录，存储输出日志，Agent持久化的相关内容 默认当前目录
+#WorkDir: /home/user/alb
+
+# lbagent id
+AgentID: 1
+
+# lbmc url
+#LBMCUrl: string
+
+# loglevel string
+LogLevel: info
+
+# audit log path 当前目录下的logs/agent_audit.log
+#AuditLogPath: /home/user/alb/agent_audit.log
+
+# system log path 当前目录下的logs/agent_sys.log
+#SysLogPath: /home/user/alb/agent_sys.log
+
+# 接受状态汇报的etcd地址
+Endpoints:
+  - https://172.20.4.210:30006
+
+# Etcd 证书双向认证
+#EtcdTLS:
+#   ca: config/test/tls/ca.crt
+#   cert: config/test/tls/peer.crt
+#   key: config/test/tls/peer.key
+
+# keepalived配置
+Keepalived: 
+  # false为非高可用部署, 其余参数可以不传
+  TurnOn: false
+  INet: eth0
+  VirutalRouterID: 51
+  State: MASTER
+  Priority: 100
+  UnicastSrcIP:  127.0.0.1
+  UnicastPeer: 
+    - 127.0.0.2
+    - 127.0.0.3
+  VirtualIP: 172.17.60.88/24

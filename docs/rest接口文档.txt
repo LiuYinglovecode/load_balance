@@ -1,0 +1,74 @@
+LBMC的REST接口:
+  - 发送lb创建请求
+      - 请求路径: /1/lb
+	  - 请求方法: post
+	  - 请求体是: lbrequest的json格式
+	  - 返回值: {"request_id": 12345}    
+  - 发送lb更新请求
+      - 请求路径: /1/lb
+	  - 请求方法: put
+	  - 请求体是: lbrequest的json格式
+	  - 返回值: {"request_id": 12345}    	  
+  - 发送lb删除请求
+      - 请求路径: /1/lb/{request_id}
+	  - 请求方法: delete
+	  - 请求体是: lbrequest的json格式
+	  - 返回值: {"request_id": 12345}      
+  - 查询lb请求的处理状态
+      - 请求路径: /1/lb/{request_id}
+	  - 请求方法: get
+	  - 参数: request_id
+	  - 返回值: {"status": "pending"}
+---	  
+  - 查询单个lbr
+      - 请求路径: /1/lbr/{lbr_id}
+	  - 请求方法: get
+	  - 参数：lbr_id
+	  - 返回值: lbr的json格式
+  - 列出所有lbr
+      - 请求路径: /1/lbr?owner=12345&ip=xxxxx&port=xxxx&domain=&&&&&
+	  - 请求方法: get
+	  - 请求参数： owner,可选，用户id
+	               ip可选, lbr的ip
+				   port可选, lbr的port
+				   domain可选，lbr的domain
+	  - 返回值: lbr列表的json格式
+  - 创建lbr
+      - 请求路径: /l/lbr
+	  - 请求方法: post
+	  - 返回值: lbr的json格式  
+  - 更新lbr
+      - 请求路径: /l/lbr/{lbr_id}
+	  - 请求方法: put
+	  - 参数：lbr_id
+	  - 返回值: lbr的json格式
+  - 删除lbr
+      - 请求路径: /l/lbr/{lbr_id}
+	  - 请求方法: delete
+	  - 参数：lbr_id
+	  - 返回值: lbr的json格式 
+---
+  - 查询单个lbp
+      - 请求路径: /l/lbp/{lbp_id}
+	  - 请求方法: get
+	  - 参数：lbp_id
+	  - 返回值: lbp的json格式
+  - 列出所有lbp
+      - 请求路径: /1/lbp
+	  - 请求方法: get
+	  - 请求参数： 根据开发需要添加查询参数
+	  - 返回值: lbp列表的json格式
+  - 创建lbp
+      - 请求路径: /l/lbp
+	  - 请求方法: post
+	  - 返回值: lbp的json格式  
+  - 更新lbp
+      - 请求路径: /l/lbp/{lbp_id}
+	  - 请求方法: put
+	  - 参数：lbp_id
+	  - 返回值: lbp的json格式
+  - 删除lbp
+      - 请求路径: /l/lbp/{lbp_id}
+	  - 请求方法: delete
+	  - 参数：lbp_id
+	  - 返回值: lbp的json格式 	  

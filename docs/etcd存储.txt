@@ -1,0 +1,14 @@
+etcd中key-value:
+
+存储负载均衡请求:
+key:
+/adc/lbrequest/{agent_id}
+value:
+lb request 的json格式
+
+agent的状态汇报:
+key:
+/adc/agent/{agent_id}/MASTER
+/adc/agent/{agent_id}/BACKUP
+value：
+agent status 的json格式

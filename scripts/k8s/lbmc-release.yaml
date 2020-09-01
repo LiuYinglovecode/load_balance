@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: alb-lbmc-svc
+  namespace: kube-system
+  labels:
+    app: alb-lbmc
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 7021
+      protocol: TCP
+  selector:
+    app: alb-lbmc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alb-lbmc
+  namespace: kube-system
+  labels:
+    app: alb-lbmc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alb-lbmc
+  template:
+    metadata:
+      labels:
+        app: alb-lbmc
+    spec:
+      containers:
+        - name: albcp
+          image: hub.htres.cn/pub/lbmc:latest
+          imagePullPolicy: Always
+          env:
+          - name: PROFILE_CONF
+            value: release
+          - name: GIN_MODE
+            value: release
+          command: ["lbmc"]
+          args: ["serve", "--config=config/$(PROFILE_CONF)/center.yaml"]

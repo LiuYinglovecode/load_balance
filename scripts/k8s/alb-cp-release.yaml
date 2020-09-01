@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alb-cloudprovider
+  namespace: kube-system
+  labels:
+    app: alb-cloudprovider
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alb-cloudprovider
+  template:
+    metadata:
+      labels:
+        app: alb-cloudprovider
+    spec:
+      containers:
+        - name: albcp
+          image: hub.htres.cn/pub/albcp:latest
+          imagePullPolicy: Always
+          env:
+          - name: PROFILE_CONF
+            value: release
+          command: ["alb-cp"]
+          args: ["--cloud-provider=htnm", "--cloud-config=config/$(PROFILE_CONF)/albcp.cfg"]
+      serviceAccountName: "admin-user"
+      serviceAccount: "admin-user"
