@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "cn.htres.adc.alb";
+option java_outer_classname = "AgentAPIProto";
+
+package apis;
+
+// api命令， 封装各种部署与请求命令。 data通过json来封装有客户端和服务器端自行解析
+message LBCommand {
+    string cmd = 1;
+    bytes data = 2;
+    bytes context = 3;
+}
+
+// api执行结果 msg 对结果的描述。 context 为传入时附带的内容
+message LBCommandResult {
+    int32 code = 1; //程序执行返回代码
+    string msg = 2; //执行结果描述
+    bytes data = 3; //执行结果内容
+    bytes context = 4;
+}
+
+// The  Commander definition.
+service Commander {
+    // Sends a greeting
+    rpc Execute (LBCommand) returns (LBCommandResult) {}
+}
